@@ -18,7 +18,11 @@ Archivo clave Ejecución:
 ``` bash
 python src/pipeline_rag_ner_judicial.py
 
-```
+``` bash
+Otro archivo de ejecucion para probar llama
+``` bash
+python src/pipeline_rag_llama.py 
+``` bash            
 ------------------------------------------------------------------------
 
 ## 📂 Estructura del proyecto
