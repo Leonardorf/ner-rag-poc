@@ -1,0 +1,4 @@
+Hugo Villegas es Ingeniero en Sistemas con experiencia en transformación digital.
+Trabajó en YPF liderando proyectos de datos y MLOps.
+En 2024 participó en iniciativas de inteligencia artificial.
+Actualmente utiliza tecnologías como spaCy, MLflow y modelos LLaMA.
