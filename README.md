@@ -112,3 +112,24 @@ GitHub: https://github.com/Leonardorf
 
 > Nota: este proyecto es un PoC técnico, no optimizado para
 > producción.
+> Nota Borrador para Windows  usando Vs code
+ Habilitar conda en PowerShell.
+
+1️⃣ Abrí Anaconda Prompt (una sola vez/Windows)
+
+Ejecutá:
+
+conda init powershell
+
+2️⃣ Cerrá TODO
+
+Cerrá VS Code
+
+Cerrá PowerShell
+
+3️⃣ Abrí VS Code de nuevo
+
+Nueva terminal:
+
+conda activate ner-rag
+Listo para ejecutar los pipelines
