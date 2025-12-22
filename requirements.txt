@@ -1,7 +1,0 @@
-spacy==3.7.4
-scikit-learn
-rank-bm25
-streamlit
-numpy
-tqdm
-mlflow==2.12.1

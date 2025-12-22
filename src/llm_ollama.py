@@ -1,15 +1,17 @@
 # src/llm_ollama.py
 import requests
+import requests
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL = "llama3.2:3b"  # Opciones: llama3.2:3b | llama3.1:8b | phi3:mini | gemma2:2b
+# Seleccionamos el modelo por defecto a usar con Ollama
+MODEL = "llama3.1:8b"
 
 
 def ask_llama(prompt: str) -> str:
     payload = {
         "model": MODEL,
         "prompt": prompt,
-        "stream": False
+        "stream": False,
     }
 
     response = requests.post(OLLAMA_URL, json=payload, timeout=300)
@@ -18,5 +20,6 @@ def ask_llama(prompt: str) -> str:
         print("Error Ollama:", response.text)
         response.raise_for_status()
 
+    return response.json()["response"]
     return response.json()["response"]
 
