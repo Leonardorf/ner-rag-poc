@@ -74,7 +74,7 @@ ejemplo
 ## 📤 Ejemplo de uso institucional
 ### Texto procesado
 
-“En el expediente EXP-2021-00458723-GDEMSA, el Juzgado Civil y Comercial N° 3 resolvió la causa iniciada por Pérez, Juan contra la Dirección de Registros Públicos.”
+“En el expediente EXP-2021-00458723-GDEMZA, el Juzgado Civil y Comercial N° 3 resolvió la causa iniciada por Pérez, Juan contra la Dirección de Registros Públicos.”
 
 Consulta en lenguaje natural
 
