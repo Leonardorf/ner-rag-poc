@@ -3,7 +3,7 @@ Dirección de Registros Públicos y Archivo Judicial
 
 ------------------------------------------------------------------------
 
-## 🎯 Objetivo del Proyecto
+##  Objetivo del Proyecto
 
 Este Proof of Concept (PoC) demuestra cómo aplicar Reconocimiento de Entidades Nombradas (NER) y RAG (Retrieval Augmented Generation) para facilitar la consulta inteligente de documentos judiciales archivados.
 
@@ -25,7 +25,7 @@ python src/pipeline_rag_llama.py
 ```            
 ------------------------------------------------------------------------
 
-## 📂 Estructura del proyecto
+##  Estructura del proyecto
 
 ![Estructura del proyecto](estructura.png)
 
@@ -35,7 +35,7 @@ ejemplo
 
 ------------------------------------------------------------------------
 
-## ⚙️ Requisitos
+##  Requisitos
 
 -   Python 3.10
 -   Conda
@@ -44,7 +44,7 @@ ejemplo
 
 ------------------------------------------------------------------------
 
-## 📤 Flujo funcional
+##  Flujo funcional
 
 1 Ingreso de textos judiciales
 
@@ -71,7 +71,7 @@ ejemplo
 
 
 
-## 📤 Ejemplo de uso institucional
+##  Ejemplo de uso institucional
 ### Texto procesado
 
 “En el expediente EXP-2021-00458723-GDEMZA, el Juzgado Civil y Comercial N° 3 resolvió la causa iniciada por Pérez, Juan contra la Dirección de Registros Públicos.”
@@ -88,7 +88,7 @@ La Dirección de Registros Públicos intervino en el expediente EXP-2021-0045872
 ✔️ Basada exclusivamente en el archivo
 ✔️ Sin inferencias ni interpretación jurídica
 
-🔐 Principios clave para uso judicial
+ Principios clave para uso judicial
 
 El sistema no toma decisiones legales
 
@@ -103,9 +103,9 @@ Auditoría y trazabilidad completas
 ------------------------------------------------------------------------
 
 
-## 👤 Autor
+##  Autor
 
-**Leonardo Villegas**\
+**Ing. Leonardo Villegas**\
 GitHub: https://github.com/Leonardorf
 
 ------------------------------------------------------------------------
