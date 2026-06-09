@@ -1,135 +1,196 @@
-# NER + RAG Judicial PoC
-Dirección de Registros Públicos y Archivo Judicial
+# NER + RAG — Registro Inmobiliario de Mendoza
+**Dirección de Registros Públicos y Archivo Judicial**
 
-------------------------------------------------------------------------
+---
 
-##  Objetivo del Proyecto
+## Objetivo
 
-Este Proof of Concept (PoC) demuestra cómo aplicar Reconocimiento de Entidades Nombradas (NER) y RAG (Retrieval Augmented Generation) para facilitar la consulta inteligente de documentos judiciales archivados.
+Proof of Concept que demuestra cómo aplicar técnicas de **Procesamiento del Lenguaje Natural (PLN)** y **RAG (Retrieval Augmented Generation)** para consultar documentos del registro inmobiliario en lenguaje natural.
 
-El sistema permite responder preguntas en lenguaje natural utilizando exclusivamente información existente en los expedientes, garantizando trazabilidad, control y ausencia de interpretaciones automáticas.
+El sistema responde preguntas usando **exclusivamente** la información contenida en los documentos. No inventa datos, no consulta internet y procesa todo localmente dentro de la red interna.
 
-------------------------------------------------------------------------
+---
 
-## Pipeline principal (PASO 2)
-
-Archivo clave Ejecución:
-
-``` bash
-python src/pipeline_rag_ner_judicial.py
+## Arquitectura
 
 ```
-Otro archivo de ejecucion para probar llama
-``` bash
-python src/pipeline_rag_llama.py 
-```            
-------------------------------------------------------------------------
+Documentos → NER (spaCy) → Búsqueda TF-IDF + BM25 → LLM local (Ollama)
+              ↑ no generativo ↑    ↑ no generativo ↑    ↑ generativo ↑
+```
 
-##  Estructura del proyecto
+| Componente | Tecnología | Generativo |
+|------------|-----------|-----------|
+| Reconocimiento de entidades (NER) | spaCy `es_core_news_md` + EntityRuler | No |
+| Reglas de dominio registral | `ner_patterns.py` (patrones explícitos) | No |
+| Búsqueda por relevancia | TF-IDF + BM25 (scikit-learn / rank-bm25) | No |
+| Respuesta en lenguaje natural | Ollama `llama3.2:3b` (local) | Sí |
+| Interfaz web | Streamlit | — |
 
-![Estructura del proyecto](estructura.png)
+---
 
-Archivos principales: - `test_spacy.py`: prueba básica de NER con
-spaCy - `src/`: código del pipeline RAG + LLaMA - `data/`: textos de
-ejemplo
+## Requisitos
 
-------------------------------------------------------------------------
+- Python 3.11
+- [Ollama](https://ollama.com) instalado y corriendo
+- Modelo descargado: `ollama pull llama3.2:3b`
+- Red con proxy corporativo (ver configuración más abajo)
 
-##  Requisitos
+---
 
--   Python 3.10
--   Conda
--   VS Code
--   Ollama
+## Instalación
 
-------------------------------------------------------------------------
+### 1. Crear entorno virtual
 
-##  Flujo funcional
+```powershell
+py -3.11 -m venv venv
+.\venv\Scripts\Activate.ps1
+```
 
-1 Ingreso de textos judiciales
+> Si PowerShell bloquea la ejecución:
+> `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
 
-2Extracción de entidades con spaCy ES
+### 2. Instalar dependencias
 
-    Personas
+```powershell
+pip install -r requirements.txt --proxy http://10.20.1.194:3128 --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org
+```
 
-    Organismos
+### 3. Instalar modelo de español para spaCy
 
-    Fechas
+```powershell
+pip install https://github.com/explosion/spacy-models/releases/download/es_core_news_md-3.7.0/es_core_news_md-3.7.0-py3-none-any.whl --proxy http://10.20.1.194:3128 --trusted-host github.com --trusted-host objects.githubusercontent.com --trusted-host releases.githubusercontent.com
+```
 
-    Números de expediente
+### 4. Descargar modelo LLM
 
-3 Enriquecimiento semántico de los documentos
+```powershell
+ollama pull llama3.2:3b
+```
 
-4 Generación de embeddings (RoBERTa)
+---
 
-5 Búsqueda semántica (RAG)
+## Uso
 
-6 Respuesta controlada con LLaMA (Ollama)
+### Activar entorno y ver opciones
 
+```powershell
+.\activar_entorno.ps1
+```
 
-------------------------------------------------------------------------
+El script activa el venv, configura las variables de proxy y muestra los comandos disponibles.
 
+### Interfaz web (recomendado)
 
+```powershell
+streamlit run src/app.py
+```
 
-##  Ejemplo de uso institucional
-### Texto procesado
+Abre automáticamente en `http://localhost:8501`.
 
-“En el expediente EXP-2021-00458723-GDEMZA, el Juzgado Civil y Comercial N° 3 resolvió la causa iniciada por Pérez, Juan contra la Dirección de Registros Públicos.”
+### Uso en red local (otras PCs)
 
-Consulta en lenguaje natural
+```powershell
+streamlit run src/app.py --server.address 0.0.0.0 --server.port 8501
+```
 
-¿En qué expediente intervino la Dirección de Registros Públicos?
+Requiere que el puerto 8501 esté habilitado en el firewall de Windows.
 
-Respuesta generada
+### Pipeline por consola
 
-La Dirección de Registros Públicos intervino en el expediente EXP-2021-00458723-GDEMZA.
+```powershell
+cd src
+python pipeline_rag_ner_judicial.py
+```
 
-✔️ Respuesta breve
-✔️ Basada exclusivamente en el archivo
-✔️ Sin inferencias ni interpretación jurídica
+---
 
- Principios clave para uso judicial
+## Variables de entorno requeridas
 
-El sistema no toma decisiones legales
+| Variable | Valor | Por qué |
+|----------|-------|---------|
+| `HTTPS_PROXY` | `http://10.20.1.194:3128` | Proxy corporativo |
+| `HTTP_PROXY` | `http://10.20.1.194:3128` | Proxy corporativo |
+| `NO_PROXY` | `localhost,127.0.0.1` | Evita que el proxy intercepte Ollama |
+| `HF_HUB_DISABLE_SSL_VERIFICATION` | `1` | Certificado autofirmado del proxy |
 
-No modifica documentos originales
+El script `activar_entorno.ps1` las configura automáticamente.
 
-Responde solo si la información está presente
+---
 
-Procesamiento local
+## Estructura del proyecto
 
-Auditoría y trazabilidad completas
+```
+ner-rag-poc-main/
+├── activar_entorno.ps1        # Script de arranque
+├── requirements.txt           # Dependencias Python
+├── CHANGELOG.md               # Historial de versiones y decisiones técnicas
+├── src/
+│   ├── app.py                 # Interfaz web Streamlit
+│   ├── ner_patterns.py        # Reglas de dominio registral (EntityRuler)
+│   ├── llm_ollama.py          # Cliente Ollama (cambiar modelo aquí)
+│   ├── embeddings.py          # Embeddings originales (referencia)
+│   └── pipeline_rag_ner_judicial.py  # Pipeline por consola
+└── data/
+    └── sample.txt
+```
 
-------------------------------------------------------------------------
+---
 
+## Agregar nuevos formatos de expediente
 
-##  Autor
+Editá `src/ner_patterns.py` y agregá una entrada a `PATRONES_REGISTRALES`:
 
-**Ing. Leonardo Villegas**\
-GitHub: https://github.com/Leonardorf
+```python
+{
+    "label": "NRO_EXPEDIENTE",
+    "pattern": [{"TEXT": {"REGEX": r"^TU-PREFIJO-\d{4}-\d{4,8}$"}}]
+},
+```
 
-------------------------------------------------------------------------
+Y su descripción en `DESCRIPCION_PATRONES` para que aparezca en la interfaz.
 
-> Nota: este proyecto es un PoC técnico, no optimizado para
-> producción.
-> Nota Borrador para Windows  usando Vs code
- Habilitar conda en PowerShell.
+---
 
-1️⃣ Abrí Anaconda Prompt (una sola vez/Windows)
+## Cambiar modelo LLM
 
-Ejecutá:
+Editá la línea `MODEL` en `src/llm_ollama.py`:
 
-conda init powershell
+```python
+MODEL = "llama3.2:3b"   # rápido, ~2 GB RAM
+# MODEL = "llama3.1:8b" # mayor calidad, ~5.5 GB RAM
+# MODEL = "phi3:mini"   # muy rápido, respuestas cortas
+```
 
-2️⃣ Cerrá TODO
+---
 
-Cerrá VS Code
+## Ejemplo de consulta
 
-Cerrá PowerShell
+**Pregunta:** ¿Sobre qué inmueble se ordenó el embargo y quién es su titular?
 
-3️⃣ Abrí VS Code de nuevo
+**Respuesta:** Se ordenó embargo sobre el inmueble Padrón N° 71.008, ubicado en Godoy Cruz, Mendoza, de titularidad de Constructora Del Sur S.R.L.
 
-Nueva terminal:
+✔ Basada exclusivamente en el documento  
+✔ Sin inferencias ni interpretación jurídica  
+✔ Procesamiento 100% local — los datos no salen de la red interna  
 
-conda activate ner-rag
-Listo para ejecutar los pipelines
+---
+
+## Principios de diseño
+
+- El sistema **no toma decisiones legales**
+- **No modifica** documentos originales
+- Responde solo si la información está **explícitamente presente**
+- Todo el procesamiento es **local** (Ollama corre en la misma máquina)
+- Los pasos de búsqueda son **auditables y reproducibles**
+
+---
+
+## Autor
+
+**Ing. Leonardo Villegas**  
+GitHub: [https://github.com/Leonardorf](https://github.com/Leonardorf)  
+Dirección de Registros Públicos y Archivo Judicial — Mendoza
+
+---
+
+> Este proyecto es un PoC técnico orientado a demostración. Ver `CHANGELOG.md` para el detalle de decisiones técnicas y limitaciones conocidas.
