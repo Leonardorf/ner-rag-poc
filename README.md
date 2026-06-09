@@ -3,6 +3,12 @@
 
 ---
 
+## Captura del sistema
+
+![Consultor de Expedientes Judiciales](Consultor%20de%20Expedientes%20Judiciales.png)
+
+---
+
 ## Objetivo
 
 Proof of Concept que demuestra cómo aplicar técnicas de **Procesamiento del Lenguaje Natural (PLN)** y **RAG (Retrieval Augmented Generation)** para consultar documentos del registro inmobiliario en lenguaje natural.
