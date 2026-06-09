@@ -1,7 +1,7 @@
 import os
 os.environ.setdefault("NO_PROXY", "localhost,127.0.0.1")
-os.environ.setdefault("HTTPS_PROXY", "http://10.20.1.194:3128")
-os.environ.setdefault("HTTP_PROXY", "http://10.20.1.194:3128")
+os.environ.setdefault("HTTPS_PROXY", "http://<PROXY_HOST>:<PUERTO>")
+os.environ.setdefault("HTTP_PROXY", "http://<PROXY_HOST>:<PUERTO>")
 os.environ.setdefault("HF_HUB_DISABLE_SSL_VERIFICATION", "1")
 
 import sys

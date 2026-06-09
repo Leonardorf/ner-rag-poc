@@ -58,13 +58,13 @@ py -3.11 -m venv venv
 ### 2. Instalar dependencias
 
 ```powershell
-pip install -r requirements.txt --proxy http://10.20.1.194:3128 --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org
+pip install -r requirements.txt --proxy http://<PROXY_HOST>:<PUERTO> --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org
 ```
 
 ### 3. Instalar modelo de español para spaCy
 
 ```powershell
-pip install https://github.com/explosion/spacy-models/releases/download/es_core_news_md-3.7.0/es_core_news_md-3.7.0-py3-none-any.whl --proxy http://10.20.1.194:3128 --trusted-host github.com --trusted-host objects.githubusercontent.com --trusted-host releases.githubusercontent.com
+pip install https://github.com/explosion/spacy-models/releases/download/es_core_news_md-3.7.0/es_core_news_md-3.7.0-py3-none-any.whl --proxy http://<PROXY_HOST>:<PUERTO> --trusted-host github.com --trusted-host objects.githubusercontent.com --trusted-host releases.githubusercontent.com
 ```
 
 ### 4. Descargar modelo LLM
@@ -114,8 +114,8 @@ python pipeline_rag_ner_judicial.py
 
 | Variable | Valor | Por qué |
 |----------|-------|---------|
-| `HTTPS_PROXY` | `http://10.20.1.194:3128` | Proxy corporativo |
-| `HTTP_PROXY` | `http://10.20.1.194:3128` | Proxy corporativo |
+| `HTTPS_PROXY` | `http://<PROXY_HOST>:<PUERTO>` | Proxy corporativo |
+| `HTTP_PROXY` | `http://<PROXY_HOST>:<PUERTO>` | Proxy corporativo |
 | `NO_PROXY` | `localhost,127.0.0.1` | Evita que el proxy intercepte Ollama |
 | `HF_HUB_DISABLE_SSL_VERIFICATION` | `1` | Certificado autofirmado del proxy |
 

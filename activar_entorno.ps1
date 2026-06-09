@@ -1,9 +1,9 @@
 # Activar entorno virtual
 .\venv\Scripts\Activate.ps1
 
-# Proxy corporativo (10.20.1.194:3128) con certificado autofirmado
-$env:HTTPS_PROXY = "http://10.20.1.194:3128"
-$env:HTTP_PROXY  = "http://10.20.1.194:3128"
+# Proxy corporativo — reemplazar <PROXY_HOST>:<PUERTO> con los valores reales del entorno
+$env:HTTPS_PROXY = "http://<PROXY_HOST>:<PUERTO>"
+$env:HTTP_PROXY  = "http://<PROXY_HOST>:<PUERTO>"
 $env:NO_PROXY    = "localhost,127.0.0.1"
 
 # Deshabilitar verificacion SSL para HuggingFace (cert corporativo autofirmado)

@@ -99,7 +99,7 @@ aparecen en las preguntas y en los documentos.
 
 ### Entorno
 - Python 3.11 (venv)
-- Proxy corporativo: `10.20.1.194:3128` con certificado SSL autofirmado
+- Proxy corporativo: `<PROXY_HOST>:<PUERTO>` con certificado SSL autofirmado
 - Variables requeridas: `HTTPS_PROXY`, `HTTP_PROXY`, `NO_PROXY=localhost`, `HF_HUB_DISABLE_SSL_VERIFICATION=1`
 
 ### Por qué Ollama en lugar de Claude API
