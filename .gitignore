@@ -27,3 +27,9 @@ Thumbs.db
 
 # Variables de entorno
 .env
+
+# Claude Code
+.claude/
+
+# Scripts locales con configuración de red interna
+activar_entorno.ps1
