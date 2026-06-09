@@ -1,0 +1,6 @@
+spacy==3.7.4
+sentence-transformers==2.7.0
+faiss-cpu==1.8.0
+mlflow==2.12.1
+numpy
+tqdm

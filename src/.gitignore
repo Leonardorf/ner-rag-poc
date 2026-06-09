@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+
+# Entornos
+.venv/
+env/
+conda-env/
+
+# Modelos / cache
+.cache/
+.cache-huggingface/
+models/
+
+# FAISS
+*.index
+
+# VS Code
+.vscode/
+
+# Datos sensibles
+.env
