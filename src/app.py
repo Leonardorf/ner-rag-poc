@@ -112,7 +112,7 @@ def bm25_scores(query, docs):
 # ── Página ────────────────────────────────────────────────────────
 st.set_page_config(page_title="Consultor de Expedientes", layout="wide", page_icon="⚖️")
 
-st.title("⚖️ Consultor de Expedientes Judiciales")
+st.title("⚖️ Consultor de Documentos Jurídico-Registrales")
 st.markdown(
     "Este sistema lee documentos judiciales, identifica personas y organizaciones "
     "mencionadas, y responde preguntas usando **solo la información de los documentos**. "
