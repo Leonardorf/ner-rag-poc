@@ -1,5 +1,5 @@
-# NER + RAG — Registro Inmobiliario de Mendoza
-**Dirección de Registros Públicos y Archivo Judicial**
+# NER + RAG — Documentos Jurídico-Registrales
+**Proof of Concept**
 
 ---
 
@@ -194,8 +194,7 @@ MODEL = "llama3.2:3b"   # rápido, ~2 GB RAM
 ## Autor
 
 **Ing. Leonardo Villegas**  
-GitHub: [https://github.com/Leonardorf](https://github.com/Leonardorf)  
-Dirección de Registros Públicos y Archivo Judicial — Mendoza
+GitHub: [https://github.com/Leonardorf](https://github.com/Leonardorf)
 
 ---
 

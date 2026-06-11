@@ -1,5 +1,5 @@
 # Registro de cambios y decisiones técnicas
-## Sistema NER + RAG — Registro Inmobiliario de Mendoza
+## Sistema NER + RAG — Documentos Jurídico-Registrales
 
 ---
 
@@ -10,7 +10,7 @@
 - Comparación lado a lado de TF-IDF vs BM25 en el Paso 2
 - EntityRuler con reglas de dominio registral (`ner_patterns.py`)
 - Glosario integrado: PLN, NER, TF-IDF, BM25, RAG y su importancia jurídica
-- 6 documentos de ejemplo del registro inmobiliario mendocino
+- 6 documentos de ejemplo del registro inmobiliario
 - 10 preguntas sugeridas clickeables con campo libre editable
 - El nombre del modelo LLM se muestra dinámicamente desde `llm_ollama.py`
 
